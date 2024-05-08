@@ -103,19 +103,6 @@ send_message() {
     echo
 }
 
-send_message_to_topic() {
-    container=$1
-    name=$(container_to_name $container)
-    shift 1
-    topic=$1
-    shift 1
-    msg=$@
-
-    log "Sending messages to $container - $msg"
-    docker-compose exec -t $name bash -c "echo $msg | kafka-console-producer --broker-list localhost:9092 --topic $topic --sync --request-required-acks -1 --request-timeout-ms 10000"
-    echo
-}
-
 read_messages() {
     container=$1
     name=$(container_to_name $container)
