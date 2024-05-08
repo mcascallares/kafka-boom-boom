@@ -19,7 +19,6 @@ interface=eth0
 
 log() {
     echo -n '$> '
-
     echo "`echo $@ | tr '\r' '\n'`"
 }
 
