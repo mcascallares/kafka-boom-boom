@@ -5,6 +5,9 @@ source ../utils/utils.sh
 docker-compose down -v
 docker-compose up -d
 
+echo "Waiting 30 seconds for containers to start..."
+sleep 30
+
 KAFKA_1_IP=$(container_to_ip kafka-1)
 KAFKA_2_IP=$(container_to_ip kafka-2)
 KAFKA_3_IP=$(container_to_ip kafka-3)
