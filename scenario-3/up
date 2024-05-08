@@ -2,8 +2,8 @@
 
 source ../utils/utils.sh
 
-docker-compose down -v
-ZOOKEEPER_SERVERS="zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888" docker-compose up -d
+docker compose down -v
+ZOOKEEPER_SERVERS="zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888" docker compose up -d
 export ZOOKEEPER_SERVERS=""
 
 KAFKA_1_IP=$(container_to_ip kafka-1)
@@ -23,25 +23,25 @@ main() {
 	send_message kafka-1 'before partitions'
 
 	log "Killing zookeeper-3 and kafka-4"
-	docker-compose stop zookeeper-3
-	docker-compose stop kafka-4
+	docker compose stop zookeeper-3
+	docker compose stop kafka-4
 
 	send_message kafka-1 'after killing zookeeper-3 and kafka-4'
 
 	log "Loosing kafka-1, kafka-2 and zookeeper-1 and zookeeper-2"
-	docker-compose stop zookeeper-1
-	docker-compose stop zookeeper-2
-	docker-compose stop kafka-1
-	docker-compose stop kafka-2
+	docker compose stop zookeeper-1
+	docker compose stop zookeeper-2
+	docker compose stop kafka-1
+	docker compose stop kafka-2
 
 	log "Reconfiguring zookeeper-3 new quorum"
-	ZOOKEEPER_SERVERS="zookeeper-3:2888:3888" docker-compose up -d zookeeper-3
+	ZOOKEEPER_SERVERS="zookeeper-3:2888:3888" docker compose up -d zookeeper-3
 	sleep 5
 	get_state zookeeper-3
 
 	log "Starting Kafka-4 and kafka-3"
-	docker-compose up -d kafka-4
-	docker-compose up -d kafka-3
+	docker compose up -d kafka-4
+	docker compose up -d kafka-3
 	sleep 15
 
 	read_messages kafka-4

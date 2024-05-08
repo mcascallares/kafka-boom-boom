@@ -2,8 +2,8 @@
 
 source ../utils/utils.sh
 
-docker-compose down -v
-docker-compose up -d
+docker compose down -v
+docker compose up -d
 
 echo "Waiting 10 seconds for containers to start..."
 sleep 10
@@ -42,7 +42,7 @@ main() {
 	describe_topic kafka-1 test
 
   log "Stop kafka-3"
-	docker-compose stop kafka-3
+	docker compose stop kafka-3
 
 	describe_topic kafka-1 test
 	log "kafka-3 still leader as the only one in ISR and unclean election not enabled"
@@ -54,7 +54,7 @@ main() {
 
 	log 'Network outage ends'
 	remove_partition kafka-1 kafka-2
-	docker-compose start kafka-3
+	docker compose start kafka-3
 
 	log 'Waiting for the system to recover'
 	sleep 45

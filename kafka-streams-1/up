@@ -2,8 +2,8 @@
 
 source ../utils/utils.sh
 
-docker-compose down -v
-docker-compose up -d
+docker compose down -v
+docker compose up -d
 
 KAFKA_1_IP=$(container_to_ip kafka-1)
 KAFKA_2_IP=$(container_to_ip kafka-2)
