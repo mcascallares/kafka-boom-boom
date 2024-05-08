@@ -161,14 +161,14 @@ create_topic() {
     min=$1
 
     log "Creating topic with partitions=$partitions, replication factor=$repl and min.isr=$min"
-    log `docker exec -t $name kafka-topics --zookeeper localhost:2181 --create --topic $topic --replication-factor $repl --config min.insync.replicas=$min --partitions $partitions`
+    log `docker exec -t $name kafka-topics --bootstrap-server localhost:9092 --create --topic $topic --replication-factor $repl --config min.insync.replicas=$min --partitions $partitions`
 }
 
-describe_topic() {
+describe_topic() {  
     container=$1
     name=$(container_to_name $container)
     shift 1
     topic=$1
 
-    log `docker exec -t $name kafka-topics --zookeeper localhost:2181 --describe --topic $topic`
+    log `docker exec -t $name kafka-topics --bootstrap-server localhost:9092 --describe --topic $topic`
 }

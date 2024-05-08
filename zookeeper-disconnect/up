@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export CONFLUENT_VERSION=4.0.0
-
 docker-compose down -v
 docker-compose up -d
 
@@ -18,7 +16,7 @@ source ../utils/utils.sh
 
 main() {
 
-	create_topic zookeeper test 1 4 3
+	create_topic kafka-1 test 1 4 3
 	sleep 15
 	get_state zookeeper
 	send_message kafka-1 'before partitions'

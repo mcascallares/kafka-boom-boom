@@ -18,10 +18,10 @@ interface=eth0
 
 main() {
 	sleep 15
-	create_topic zookeeper-1 test 3 3 2
+	create_topic kafka-1 test 3 3 2
 	sleep 5
 
-	describe_topic zookeeper-1 test
+	describe_topic kafka-1 test
 
 	for i in $(seq 9); do
 		send_message kafka-2 "before network partition on kafka-3 msg $i"
