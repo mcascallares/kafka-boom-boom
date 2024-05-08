@@ -39,12 +39,12 @@ main() {
 		send_message kafka-3 "after network partition on kafka-3 msg $i"
 	done
 
-	describe_topic zookeeper-1 test
+	describe_topic kafka-1 test
 
   log "Stop kafka-3"
 	docker-compose stop kafka-3
 
-	describe_topic zookeeper-1 test
+	describe_topic kafka-1 test
 	log "kafka-3 still leader as the only one in ISR and unclean election not enabled"
 	log "Messages sent to partition where kafka-3 is leader will fail"
 
@@ -59,7 +59,7 @@ main() {
 	log 'Waiting for the system to recover'
 	sleep 45
 
-	describe_topic zookeeper-1 test
+	describe_topic kafka-3 test
 
 	for i in $(seq 9); do
 		send_message kafka-2 "back to normal msg $i"
