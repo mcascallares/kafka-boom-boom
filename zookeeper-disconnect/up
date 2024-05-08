@@ -5,6 +5,9 @@ export CONFLUENT_VERSION=4.0.0
 docker-compose down -v
 docker-compose up -d
 
+echo "Waiting 30 seconds for containers to start..."
+sleep 30
+
 KAFKA_1_IP=`docker-compose exec kafka-1 bash -c "hostname -I"`
 KAFKA_2_IP=`docker-compose exec kafka-2 bash -c "hostname -I"`
 KAFKA_3_IP=`docker-compose exec kafka-3 bash -c "hostname -I"`
