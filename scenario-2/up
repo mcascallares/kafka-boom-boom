@@ -15,7 +15,6 @@ KAFKA_4_IP=$(container_to_ip kafka-4)
 ZOO_IP=$(container_to_ip zookeeper)
 
 main() {
-
 	create_topic kafka-1 test 1 4 3
 	sleep 5
 	get_state zookeeper
